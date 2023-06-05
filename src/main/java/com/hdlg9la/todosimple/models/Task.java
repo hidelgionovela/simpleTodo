@@ -1,6 +1,6 @@
 package com.hdlg9la.todosimple.models;
 
-import org.hibernate.mapping.ManyToOne;
+// import org.hibernate.mapping.ManyToOne;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
