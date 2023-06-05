@@ -1,0 +1,34 @@
+
+
+
+Explicacao Do fluxo de uma API com SpringBootApplication
+
+0. Requisicao feita apartir de uma view por exemplo(Template)
+1. É Chamado o Controler 
+2. O Controller vai chamar o Service
+3. E o service vai comunicar com o Repository
+4. E o Repository vai usar o model para buscar os dados no banco de dados
+
+
+Controler
+O Controller é responsável por receber as requisições HTTP dos clientes,
+
+
+Service
+A Camada de Serviço encapsula a lógica de negócio e realiza processamentos
+adicionais, atuando como intermediária entre o Controlador e a Camada de
+Acesso a Dados (Repository). uma vantagem do service e a reusabilidade dos seu metodos
+Exemplo metodo que busca um usuario pelo id, pode ser usado em muitas 
+ocasioes na aplicação. pode ser para deletar ou mesmo para actualizar
+
+Repository
+A Camada de Acesso a Dados interage com o banco de dados ou qualquer outra 
+fonte de dados para realizar operações CRUD (Criar, Ler, Atualizar, Excluir). 
+Pode-se usar o Spring Data JPA, JDBC ou qualquer outro framework 
+ORM (Object-Relational Mapping) para se comunicar com o banco de dados.
+
+
+Model
+ O Modelo representa os objetos de dados ou entidades usados dentro da aplicação. 
+ Ele encapsula os dados e fornece métodos para acessá-los e manipulá-los. Os objetos 
+ de modelo são geralmente classes Java com métodos getter e setter.
