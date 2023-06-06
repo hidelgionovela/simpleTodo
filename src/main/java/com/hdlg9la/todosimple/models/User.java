@@ -3,6 +3,7 @@ package com.hdlg9la.todosimple.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -34,10 +35,11 @@ public class User {
          @Column(name = "id", unique = true)
          private Long id;
 
+         
          @Column(name = "username", length = 100, nullable = false, unique = true)
-         @NotNull(groups = CreateUser.class)
-         @NotEmpty(groups = CreateUser.class)
-         @Size(groups = CreateUser.class, min = 2, max = 50)
+         @NotNull(groups = {CreateUser.class, UpdateUser.class})
+         @NotEmpty(groups = {CreateUser.class, UpdateUser.class})
+         @Size(groups = CreateUser.class, min = 4, max = 50)
          private String username;
 
 
@@ -45,7 +47,7 @@ public class User {
          @Column(name = "password", length = 60, nullable = false)
          @NotNull(groups = { CreateUser.class, UpdateUser.class })
          @NotEmpty(groups = { CreateUser.class, UpdateUser.class })
-         @Size(groups = { CreateUser.class, UpdateUser.class }, min = 4, max = 8)
+         @Size(groups = { CreateUser.class, UpdateUser.class }, min = 4, max = 15)
          private String password;
 
 
@@ -56,14 +58,19 @@ public class User {
 
          }
 
-         public User(Long id,
-                           @NotNull(groups = CreateUser.class) @NotEmpty(groups = CreateUser.class) @Size(groups = CreateUser.class, min = 2, max = 50) String username,
-                           @NotNull(groups = { CreateUser.class, UpdateUser.class }) @NotEmpty(groups = {
-                                             CreateUser.class, UpdateUser.class }) @Size(groups = { CreateUser.class,
-                                                               UpdateUser.class }, min = 4, max = 8) String password) {
-                  this.id = id;
-                  this.username = username;
-                  this.password = password;
+         public User(Long id, 
+                           @NotNull(groups = CreateUser.class) 
+                           @NotEmpty(groups = CreateUser.class) 
+                           @Size(groups = CreateUser.class, min = 4, max = 50) 
+                           String username,
+                           @NotNull(groups = { CreateUser.class, UpdateUser.class }) 
+                           @NotEmpty(groups = {CreateUser.class, UpdateUser.class }) 
+                           @Size(groups = { CreateUser.class, UpdateUser.class }, min = 4, max = 15) 
+                           String password) {
+
+                                             this.id = id;
+                                             this.username = username;
+                                             this.password = password;
          }
 
 
@@ -130,6 +137,7 @@ public class User {
                   return true;
          }
 
+         @JsonIgnore
          public List<Task> getTasks() {
                   return tasks;
          }
