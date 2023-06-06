@@ -12,6 +12,7 @@ Explicacao Do fluxo de uma API com SpringBootApplication
 
 Controler
 O Controller é responsável por receber as requisições HTTP dos clientes,
+É a camada que comunica-se com as views de onde o ususrio faz as solicitacoes
 
 
 Service
@@ -32,3 +33,55 @@ Model
  O Modelo representa os objetos de dados ou entidades usados dentro da aplicação. 
  Ele encapsula os dados e fornece métodos para acessá-los e manipulá-los. Os objetos 
  de modelo são geralmente classes Java com métodos getter e setter.
+
+
+ Anotacoes no SpringBootApplication
+ @Autowired
+ ->
+ @Validate
+ ->
+ @Repository
+ ->
+ @Service
+ ->
+ @RequestMapping
+ ->
+ @Controller
+ ->
+ @RestController
+ ->
+ @Entity
+ ->
+ @Transactional
+ ->
+ @
+
+
+ @Repository
+public interface TaskRepository extends JpaRepository<Task, Long>{
+
+//       Exemplo1 queremos buscar a lista de tarefas que temos na BD 
+
+// usando as classes do jpa
+// Aqui o nome da funcao nao pode ser mudado para ser interpretado pelo jpa
+List<Task> findByUser_Id(Long id);
+
+
+
+//       Exemplo2 queremos buscar a lista de tarefas que temos na BD 
+
+// usando as classes do jpql(que ee mais proximo ao sql puro)
+// Aqui o nome da funcao pode ser mudadoo que importa ee a query
+// @Query(value = "SELECT t FROM Task t WHERE t.user.id = :user_id")
+// List<Task> findByUserId(@Param("user_id") Long user_id);
+
+
+
+//       Exemplo3 queremos buscar a lista de tarefas que temos na BD 
+
+// usando o sql puro (nativo)
+// Aqui o nome da funcao pode ser mudadoo que importa ee a query
+// @Query( value = "SELECT * FROM task t WHERE t.user_id = :id", nativeQuery = true)
+// List<Task> findByUserId(@Param("id") Long id);
+   
+}
