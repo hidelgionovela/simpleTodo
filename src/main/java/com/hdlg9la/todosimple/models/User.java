@@ -35,13 +35,11 @@ public class User {
          @Column(name = "id", unique = true)
          private Long id;
 
-         
          @Column(name = "username", length = 100, nullable = false, unique = true)
-         @NotNull(groups = {CreateUser.class, UpdateUser.class})
-         @NotEmpty(groups = {CreateUser.class, UpdateUser.class})
+         @NotNull(groups = { CreateUser.class, UpdateUser.class })
+         @NotEmpty(groups = { CreateUser.class, UpdateUser.class })
          @Size(groups = CreateUser.class, min = 4, max = 50)
          private String username;
-
 
          @JsonProperty(access = Access.WRITE_ONLY)
          @Column(name = "password", length = 60, nullable = false)
@@ -50,7 +48,6 @@ public class User {
          @Size(groups = { CreateUser.class, UpdateUser.class }, min = 4, max = 15)
          private String password;
 
-
          @OneToMany(mappedBy = "user")
          private List<Task> tasks = new ArrayList<Task>();
 
@@ -58,23 +55,16 @@ public class User {
 
          }
 
-         public User(Long id, 
-                           @NotNull(groups = CreateUser.class) 
-                           @NotEmpty(groups = CreateUser.class) 
-                           @Size(groups = CreateUser.class, min = 4, max = 50) 
-                           String username,
-                           @NotNull(groups = { CreateUser.class, UpdateUser.class }) 
-                           @NotEmpty(groups = {CreateUser.class, UpdateUser.class }) 
-                           @Size(groups = { CreateUser.class, UpdateUser.class }, min = 4, max = 15) 
-                           String password) {
+         public User(Long id,
+                           @NotNull(groups = CreateUser.class) @NotEmpty(groups = CreateUser.class) @Size(groups = CreateUser.class, min = 4, max = 50) String username,
+                           @NotNull(groups = { CreateUser.class, UpdateUser.class }) @NotEmpty(groups = {
+                                             CreateUser.class, UpdateUser.class }) @Size(groups = { CreateUser.class,
+                                                               UpdateUser.class }, min = 4, max = 15) String password) {
 
-                                             this.id = id;
-                                             this.username = username;
-                                             this.password = password;
+                  this.id = id;
+                  this.username = username;
+                  this.password = password;
          }
-
-
-         
 
          public Long getId() {
                   return id;
