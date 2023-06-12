@@ -27,11 +27,9 @@ public class UserService {
                                     "Usuario nao encontrado! id: " + id + ", Tipo: " + User.class.getName()));
          }
 
-
-         public List <User> getAllUsers() {
+         public List<User> getAllUsers() {
                   return userRepository.findAll();
          }
-         
 
          @Transactional
          public User create(User user) {
