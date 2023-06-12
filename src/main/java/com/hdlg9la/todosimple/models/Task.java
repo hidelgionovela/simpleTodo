@@ -20,7 +20,7 @@ public class Task {
          public static final String TABLE_NAME = "task";
 
          @Id
-         @GeneratedValue(strategy =  GenerationType.IDENTITY)
+         @GeneratedValue(strategy = GenerationType.IDENTITY)
          @Column(name = "id", unique = true)
          private Long id;
 
@@ -28,17 +28,14 @@ public class Task {
          @JoinColumn(name = "user_id", nullable = false, updatable = false)
          private User user;
 
-
          @Column(name = "description", length = 255, nullable = false)
          @NotNull()
          @NotEmpty()
-         @Size( min = 2, max = 250)
+         @Size(min = 2, max = 250)
          private String description;
-
 
          public Task() {
          }
-
 
          public Task(Long id, User user, @NotNull @NotEmpty @Size(min = 2, max = 250) String description) {
                   this.id = id;
@@ -46,36 +43,29 @@ public class Task {
                   this.description = description;
          }
 
-
          public Long getId() {
                   return id;
          }
-
 
          public void setId(Long id) {
                   this.id = id;
          }
 
-
          public User getUser() {
                   return user;
          }
-
 
          public void setUser(User user) {
                   this.user = user;
          }
 
-
          public String getDescription() {
                   return description;
          }
 
-
          public void setDescription(String description) {
                   this.description = description;
          }
-
 
          @Override
          public int hashCode() {
@@ -86,7 +76,6 @@ public class Task {
                   result = prime * result + ((description == null) ? 0 : description.hashCode());
                   return result;
          }
-
 
          @Override
          public boolean equals(Object obj) {
@@ -115,11 +104,9 @@ public class Task {
                   return true;
          }
 
-
          @Override
          public String toString() {
                   return "Task [id=" + id + ", user=" + user + ", description=" + description + "]";
          }
 
-         
 }
