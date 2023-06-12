@@ -21,27 +21,23 @@ public class TaskService {
          @Autowired
          private TaskRepository taskRepository;
 
+         public Task findById(Long id) {
 
-
-         public Task findById(Long id){
-                
-                  Optional<Task> task = this.taskRepository.findById(id) ;
+                  Optional<Task> task = this.taskRepository.findById(id);
 
                   return task.orElseThrow(() -> new RuntimeException(
-                           "Tarefa nao encontrada! id: " +id+ ", Tipo: " + Task.class.getName() ));
+                                    "Tarefa nao encontrada! id: " + id + ", Tipo: " + Task.class.getName()));
          }
 
+         public List<Task> findAllByUser_Id(Long user_id) {
 
-         public List<Task> findAllByUser_Id(Long user_id){
-                
-                  List <Task> tasks = this.taskRepository.findByUser_Id(user_id) ;
+                  List<Task> tasks = this.taskRepository.findByUser_Id(user_id);
 
                   return tasks;
          }
 
-
          @Transactional
-         public Task create (Task task){
+         public Task create(Task task) {
                   User user = this.userService.findById(task.getUser().getId());
                   task.setId(null);
                   task.setUser(user);
@@ -51,8 +47,8 @@ public class TaskService {
          }
 
          @Transactional
-         public Task update (Task task){
-                  
+         public Task update(Task task) {
+
                   Task newTask = findById(task.getId());
                   newTask.setDescription(task.getDescription());
                   return this.taskRepository.save(newTask);
@@ -60,22 +56,17 @@ public class TaskService {
          }
 
          // @Transactional
-         public void delete (Long id){
-                  
+         public void delete(Long id) {
+
                   findById(id);
 
                   try {
                            this.taskRepository.deleteById(id);
                   } catch (Exception e) {
-            
+
                            throw new RuntimeException("Nao é possivel excluir pois ha entidades relacionadas");
                   }
 
          }
 
-         
-
-         
-
-         
 }
