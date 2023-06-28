@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.hdlg9la.todosimple.models.Task;
 import com.hdlg9la.todosimple.services.TaskService;
+import com.hdlg9la.todosimple.services.UserService;
 
 import jakarta.validation.Valid;
 
@@ -29,9 +30,10 @@ public class TaskController {
         @Autowired
         private TaskService taskService;
 
+        private UserService userService;
+
         @GetMapping("/{id}")
         public ResponseEntity<Task> findTaskById(@PathVariable Long id) {
-
                 Task task = this.taskService.findById(id);
                 return ResponseEntity.ok().body(task);
 
@@ -39,6 +41,8 @@ public class TaskController {
 
         @GetMapping("/user/{user_id}")
         public ResponseEntity<List<Task>> findAllTasksByUser_Id(@PathVariable Long user_id) {
+                // Todo: Verificacao da existencia do user e dar uma response caso nao exista
+                this.userService.findById(user_id);
                 List<Task> task = this.taskService.findAllByUser_Id(user_id);
                 return ResponseEntity.ok().body(task);
 
