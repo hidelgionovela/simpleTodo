@@ -42,7 +42,7 @@ public class TaskController {
         @GetMapping("/user/{user_id}")
         public ResponseEntity<List<Task>> findAllTasksByUser_Id(@PathVariable Long user_id) {
                 // Todo: Verificacao da existencia do user e dar uma response caso nao exista
-                this.userService.findById(user_id);
+                // this.userService.findById(user_id);
                 List<Task> task = this.taskService.findAllByUser_Id(user_id);
                 return ResponseEntity.ok().body(task);
 
