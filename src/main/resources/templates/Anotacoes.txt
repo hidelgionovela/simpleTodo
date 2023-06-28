@@ -1,0 +1,137 @@
+
+
+
+Explicacao Do fluxo de uma API com SpringBootApplication
+
+0. Requisicao feita apartir de uma view por exemplo(Template)
+1. É Chamado o Controler 
+2. O Controller vai chamar o Service
+3. E o service vai comunicar com o Repository
+4. E o Repository vai usar o model para buscar os dados no banco de dados
+
+
+Controler
+O Controller é responsável por receber as requisições HTTP dos clientes,
+É a camada que comunica-se com as views de onde o ususrio faz as solicitacoes
+
+
+Service
+A Camada de Serviço encapsula a lógica de negócio e realiza processamentos
+adicionais, atuando como intermediária entre o Controlador e a Camada de
+Acesso a Dados (Repository). uma vantagem do service e a reusabilidade dos seu metodos
+Exemplo metodo que busca um usuario pelo id, pode ser usado em muitas 
+ocasioes na aplicação. pode ser para deletar ou mesmo para actualizar
+
+Repository
+A Camada de Acesso a Dados interage com o banco de dados ou qualquer outra 
+fonte de dados para realizar operações CRUD (Criar, Ler, Atualizar, Excluir). 
+Pode-se usar o Spring Data JPA, JDBC ou qualquer outro framework 
+ORM (Object-Relational Mapping) para se comunicar com o banco de dados.
+
+
+Model
+ O Modelo representa os objetos de dados ou entidades usados dentro da aplicação. 
+ Ele encapsula os dados e fornece métodos para acessá-los e manipulá-los. Os objetos 
+ de modelo são geralmente classes Java com métodos getter e setter.
+
+
+ Anotacoes no SpringBootApplication
+ @Autowired
+ ->
+ @Validate
+ ->
+ @Repository
+ ->
+ @Service
+ ->
+ @RequestMapping
+ ->
+ @Controller
+ ->
+ @RestController
+ ->
+ @Entity
+ ->
+ @Transactional
+ ->
+ @
+
+
+ @Repository
+public interface TaskRepository extends JpaRepository<Task, Long>{
+
+//       Exemplo1 queremos buscar a lista de tarefas que temos na BD 
+
+// usando as classes do jpa
+// Aqui o nome da funcao nao pode ser mudado para ser interpretado pelo jpa
+List<Task> findByUser_Id(Long id);
+
+
+
+//       Exemplo2 queremos buscar a lista de tarefas que temos na BD 
+
+// usando as classes do jpql(que ee mais proximo ao sql puro)
+// Aqui o nome da funcao pode ser mudadoo que importa ee a query
+// @Query(value = "SELECT t FROM Task t WHERE t.user.id = :user_id")
+// List<Task> findByUserId(@Param("user_id") Long user_id);
+
+
+
+//       Exemplo3 queremos buscar a lista de tarefas que temos na BD 
+
+// usando o sql puro (nativo)
+// Aqui o nome da funcao pode ser mudadoo que importa ee a query
+// @Query( value = "SELECT * FROM task t WHERE t.user_id = :id", nativeQuery = true)
+// List<Task> findByUserId(@Param("id") Long id);
+   
+}
+
+
+
+
+Em uma API Spring Boot, os componentes Controller, Service, Repository e Entity 
+têm funções distintas e desempenham papéis específicos no desenvolvimento de uma 
+aplicação. Aqui está uma explicação para cada um desses componentes:
+
+Controller:
+O Controller é responsável por receber as requisições HTTP dos clientes, 
+processá-las e enviar as respostas adequadas de volta. Ele atua como a 
+camada de entrada da API e é responsável pela roteamento e manipulação 
+dos endpoints da API. O Controller recebe os dados da requisição, 
+valida-os, chama os serviços apropriados para executar a lógica de negócio 
+e retorna as respostas HTTP para o cliente. Geralmente, o Controller é 
+responsável pela interação com os objetos de modelo e pelas conversões 
+entre os dados da requisição e os objetos de modelo.
+
+Service:
+O Service é responsável por conter a lógica de negócio da aplicação. 
+Ele encapsula as regras de negócio e coordena as operações entre os 
+Controllers e os Repositories. O Service pode ser usado para realizar 
+operações complexas, como validação de dados, chamadas a APIs externas, 
+processamento de dados, transações e outras lógicas específicas da aplicação. 
+Ele geralmente interage com os objetos de modelo e utiliza os Repositories 
+para acessar os dados persistentes.
+
+Repository:
+O Repository é responsável por fornecer a camada de acesso a dados da aplicação. 
+Ele abstrai a interação com o banco de dados ou qualquer outra fonte de dados 
+subjacente, permitindo que a aplicação consulte, insira, atualize e exclua dados. 
+O Repository oferece métodos para recuperar, persistir e manipular os objetos de 
+modelo no banco de dados. Ele utiliza tecnologias como Spring Data JPA ou JDBC 
+para se comunicar com a fonte de dados. O Repository é responsável por executar 
+consultas SQL ou métodos de acesso específicos do banco de dados.
+
+Entity/Model:
+A Entity representa uma entidade de negócio dentro da aplicação. Ela é uma classe 
+que mapeia uma tabela no banco de dados, geralmente usando uma tecnologia de ORM 
+(Object-Relational Mapping) como o Hibernate. A Entity contém os atributos e métodos 
+relacionados a uma entidade específica, como validações, relacionamentos com outras 
+entidades e mapeamentos para o banco de dados. A Entity é usada para representar 
+e manipular os dados no nível do código-fonte, e o framework de persistência 
+(como o Hibernate) se encarrega de mapear essas entidades para as tabelas do banco de dados.
+
+Esses componentes trabalham em conjunto para construir uma API no Spring Boot. 
+O Controller lida com as requisições, o Service contém a lógica de negócio, o 
+Repository fornece o acesso a dados e a Entity representa as entidades de negócio. 
+Essa divisão de responsabilidades permite uma estrutura organizada e modular da aplicação, 
+facilitando a manutenção, teste e evolução do sistema.
