@@ -21,6 +21,9 @@ import com.hdlg9la.todosimple.models.User.CreateUser;
 import com.hdlg9la.todosimple.models.User.UpdateUser;
 import com.hdlg9la.todosimple.services.UserService;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -42,8 +45,17 @@ public class UserController {
         @GetMapping
         public ResponseEntity<List<User>> findAllUsers() {
 
-                List<User> user = this.userService.getAllUsers();
-                return ResponseEntity.ok().body(user);
+                List<User> users = this.userService.getAllUsers();
+                if (!users.isEmpty()) {
+                        for (var user : users) {
+                            Long id = user.getId();
+                            user.add(linkTo(methodOn(UserController.class).findUserById(id)).withRel("Detalhes do User"));
+                        }
+                }
+
+                return ResponseEntity.ok().body(users);
+
+
 
         }
 
