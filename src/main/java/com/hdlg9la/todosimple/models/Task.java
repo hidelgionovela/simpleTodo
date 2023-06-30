@@ -1,5 +1,9 @@
 package com.hdlg9la.todosimple.models;
 
+import java.io.Serializable;
+
+import org.springframework.hateoas.RepresentationModel;
+
 // import org.hibernate.mapping.ManyToOne;
 
 import jakarta.persistence.Column;
@@ -12,10 +16,21 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = Task.TABLE_NAME)
-public class Task {
+// Anotacoes do lomboque
+@AllArgsConstructor // Adiciona construtor com tos atributos
+@NoArgsConstructor // construtor vazio
+@Getter // adiciona todos getters
+@Setter // todos setters
+@EqualsAndHashCode(callSuper = true) // Adiciona os metodos equals e hascode
+public class Task extends RepresentationModel<Task> implements Serializable {
 
          public static final String TABLE_NAME = "task";
 
@@ -34,79 +49,6 @@ public class Task {
          @Size(min = 2, max = 250)
          private String description;
 
-         public Task() {
-         }
-
-         public Task(Long id, User user, @NotNull @NotEmpty @Size(min = 2, max = 250) String description) {
-                  this.id = id;
-                  this.user = user;
-                  this.description = description;
-         }
-
-         public Long getId() {
-                  return id;
-         }
-
-         public void setId(Long id) {
-                  this.id = id;
-         }
-
-         public User getUser() {
-                  return user;
-         }
-
-         public void setUser(User user) {
-                  this.user = user;
-         }
-
-         public String getDescription() {
-                  return description;
-         }
-
-         public void setDescription(String description) {
-                  this.description = description;
-         }
-
-         @Override
-         public int hashCode() {
-                  final int prime = 31;
-                  int result = 1;
-                  result = prime * result + ((id == null) ? 0 : id.hashCode());
-                  result = prime * result + ((user == null) ? 0 : user.hashCode());
-                  result = prime * result + ((description == null) ? 0 : description.hashCode());
-                  return result;
-         }
-
-         @Override
-         public boolean equals(Object obj) {
-                  if (this == obj)
-                           return true;
-                  if (obj == null)
-                           return false;
-                  if (getClass() != obj.getClass())
-                           return false;
-                  Task other = (Task) obj;
-                  if (id == null) {
-                           if (other.id != null)
-                                    return false;
-                  } else if (!id.equals(other.id))
-                           return false;
-                  if (user == null) {
-                           if (other.user != null)
-                                    return false;
-                  } else if (!user.equals(other.user))
-                           return false;
-                  if (description == null) {
-                           if (other.description != null)
-                                    return false;
-                  } else if (!description.equals(other.description))
-                           return false;
-                  return true;
-         }
-
-         @Override
-         public String toString() {
-                  return "Task [id=" + id + ", user=" + user + ", description=" + description + "]";
-         }
+        
 
 }
