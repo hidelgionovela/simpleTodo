@@ -12,7 +12,7 @@
 //                            <th scope="col">Description</th>
 //                            <th scope="col">Username</th>
 //                            <th scope="col">User Id</th>
-         
+
 //                   </thead>`;
 
 //          for (let task of tasks) {
@@ -23,14 +23,14 @@
 //                            <td scope="row" > ${task.user.username} </td>
 //                            <td scope="row" > ${task.user.id} </td>
 //                   </tr>`;
-                  
+
 //          }
 
 //          document.getElementById("tasks").innerHTML = tab;
 // }
 
 // // Funcao assincrona aquela que nao ee instantanea, vai carregar depois da pagina carregar.
-// //  usa-se mais quando estamos atratar assuntos que vem de fora do nosso localhost 
+// //  usa-se mais quando estamos atratar assuntos que vem de fora do nosso localhost
 
 // async function getApi(url) {
 //          const response = await fetch(url, {method:"GET"});
@@ -38,7 +38,7 @@
 //          var data = await response.json();
 //          console.log("ola Mundo");
 //          if (response) {
-//                   hideLoader();  
+//                   hideLoader();
 //          }
 //          show(data);
 // }
