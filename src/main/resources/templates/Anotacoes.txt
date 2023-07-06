@@ -1,4 +1,22 @@
 
+Json tasks
+
+{
+   
+         "description": "Trabalho de contabilidade Finaceira",
+         "user":{
+             "id":2
+         }
+ }
+
+ Json users
+
+ {
+   
+         "username": "Manuel",
+         "password": "Mozambique"
+}
+
 
 
 Explicacao Do fluxo de uma API com SpringBootApplication
