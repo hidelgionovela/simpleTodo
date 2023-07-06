@@ -38,6 +38,7 @@ public class TaskController {
                 return ResponseEntity.ok().body(task);
 
         }
+        
 
         @GetMapping("/user/{user_id}")
         public ResponseEntity<List<Task>> findAllTasksByUser_Id(@PathVariable Long user_id) {
@@ -48,6 +49,7 @@ public class TaskController {
 
         }
 
+
         @PostMapping
         @Validated
         public ResponseEntity<Void> createTask(@Valid @RequestBody Task task) {
@@ -57,6 +59,7 @@ public class TaskController {
                 return ResponseEntity.created(uri).build();
         }
 
+
         @PutMapping("/{id}")
         @Validated
         public ResponseEntity<Void> updateTask(@Valid @RequestBody Task task, @PathVariable Long id) {
@@ -64,6 +67,7 @@ public class TaskController {
                 this.taskService.update(task);
                 return ResponseEntity.noContent().build();
         }
+
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> deleteTask(@PathVariable Long id) {

@@ -41,6 +41,7 @@ public class UserController {
                 return ResponseEntity.ok().body(user);
 
         }
+        
 
         @GetMapping
         public ResponseEntity<List<User>> findAllUsers() {
@@ -55,9 +56,8 @@ public class UserController {
 
                 return ResponseEntity.ok().body(users);
 
-
-
         }
+
 
         @PostMapping
         @Validated(CreateUser.class)
@@ -68,6 +68,7 @@ public class UserController {
                 return ResponseEntity.created(uri).build();
         }
 
+
         @PutMapping("/{id}")
         @Validated(UpdateUser.class)
         public ResponseEntity<Void> update(@Valid @RequestBody User user, @PathVariable Long id) {
@@ -75,6 +76,7 @@ public class UserController {
                 this.userService.update(user);
                 return ResponseEntity.noContent().build();
         }
+
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> delete(@PathVariable Long id) {
